@@ -1,8 +1,46 @@
 body {
-  margin: 1em;
+  padding: 0 0 10em;
 }
-canvas {
+
+h1 {
   margin-bottom: 1em;
+}
+
+canvas {
   border: solid 1px black;
-  display: block;
+  float: left;
+  margin-bottom: 1.3em;
+}
+
+.input-group {
+  margin-bottom: 1em;
+}
+
+.control-container {
+  border: 1px solid #e1e1e8;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+.color-list {
+  margin-top: 1em;
+}
+
+#colors input {
+  float: left;
+  margin: 1%;
+  width: 31%;
+  padding: 5px;
+}
+
+.generator-controls {
+  margin-bottom: 1em;
+}
+
+.blendmodes-container {
+  height: 18em;
+}
+
+select {
+  min-height: 100% ;
 }

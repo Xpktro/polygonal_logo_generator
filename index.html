@@ -2,18 +2,100 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Polygonal Logo Generator</title>
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" charset="utf-8">
     <link rel="stylesheet" href="css/app.css" charset="utf-8">
   </head>
   <body>
-    <h1>Random logo generator</h1>
-    <canvas id="main" width="400" height="400"></canvas>
-    <input type="text" id="seed" value="" placeholder="Enter a seed">
-    <button type="button" id="generate" onclick="draw()">Generate from seed</button>
-    <button type="button" id="newseed" onclick="generateNewSeed();draw()">Generate new</button>
+    <div class="container-fluid">
+      <h1 class="text-center">Polygonal Logo Generator</h1>
+      <div class="container-fluid text-center center-block">
+        <canvas id="main" width="400" height="400" class="col-sm-offset-1"></canvas>
+        <div class="well col-xs-12 col-sm-5 col-sm-offset-1">
+          <h4>Main Controls</h4>
+          <div class="generator-controls">
+            <button type="button" class="btn btn-success" id="generate" onclick="draw()">Generate from seed</button>
+            <button type="button" class="btn btn-success" id="newseed" onclick="generateNewSeed();draw()">Generate new</button>
+          </div>
+          <h4>Generation Variables</h4>
+          <div class="input-group col-xs-8 col-xs-offset-2">
+            <span class="input-group-addon"><strong>Seed (Variation)</strong></span>
+            <input type="text" id="seed" class="form-control">
+          </div>
+          <div class="input-group col-xs-8 col-xs-offset-2">
+            <span class="input-group-addon"><strong>Number of Polygons</strong></span>
+            <input type="number" id="polygons" class="form-control" min="1" value="5">
+          </div>
+          <div class="input-group col-xs-8 col-xs-offset-2">
+            <span class="input-group-addon"><strong>Minimum Face Count</strong></span>
+            <input type="number" id="minimumPoints" class="form-control" min="3" max="12" value="3">
+          </div>
+          <div class="input-group col-xs-8 col-xs-offset-2">
+            <span class="input-group-addon"><strong>Maximum Face Count</strong></span>
+            <input type="number" id="maximumPoints" class="form-control" min="3" max="12" value="6">
+          </div>
+          <h4>Blend Modes</h4>
+          <p><small><em>Select as many modes as you want (keeping ctrl/cmd pressed). Note that some modes will drastically slow down rendering time.</em></small></p>
+          <div class="col-xs-10 col-xs-offset-1 control-container blendmodes-container">
+            <select multiple class="form-control" id="blendModes">
+              <option>normal</option>
+              <option selected>multiply</option>
+              <option selected>screen</option>
+              <option selected>overlay</option>
+              <option selected>darken</option>
+              <option selected>lighten</option>
+              <option selected>hue</option>
+              <option selected>saturation</option>
+              <option selected>color</option>
+              <option>soft-light</option>
+              <option>hard-light</option>
+              <option>color-dodge</option>
+              <option>color-burn</option>
+              <option>difference</option>
+              <option>exclusion</option>
+              <option>luminosity</option>
+              <option>subtract</option>
+              <option>add</option>
+              <option>average</option>
+              <option>pin-light</option>
+              <option>negation</option>
+              <option>source-over</option>
+              <option>source-in</option>
+              <option>source-out</option>
+              <option>source-atop</option>
+              <option>destination-over</option>
+              <option>destination-in</option>
+              <option>destination-out</option>
+              <option>destination-atop</option>
+              <option>copy</option>
+              <option>xor</option>
+            </select>
+          </div>
+          <h4>Colors</h4>
+          <p><small><em>Add or edit as many colors as you want. These will be randomly selected for each polygon.</em></small></p>
+          <div class="col-xs-10 col-xs-offset-1 control-container container-fluid">
+            <button type="button" class="btn btn-primary" id="addcolor">Add</button>
+            <button type="button" class="btn btn-danger" id="remcolor">Remove Last</button>
 
-    <script src="js/paper.full.min.js"></script>
-    <script src="js/seedrandom.js"></script>
+            <div class="row-fluid col-xs-12 color-list" id="colors">
+              <input type="text" class="col-xs-4 col-md-3 color" value="#AF93B3">
+              <input type="text" class="col-xs-4 col-md-3 color" value="#E1A7B4">
+              <input type="text" class="col-xs-4 col-md-3 color" value="#EDE3E0">
+              <input type="text" class="col-xs-4 col-md-3 color" value="#6B8ACA">
+              <input type="text" class="col-xs-4 col-md-3 color" value="#0F1860">
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="js/vendor/paper.full.min.js"></script>
+    <script src="js/vendor/seedrandom.js"></script>
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/jqColorPicker.min.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/PolygonPainter.js"></script>
     <script src="js/app.js"></script>

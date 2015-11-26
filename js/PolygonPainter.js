@@ -1,12 +1,13 @@
 var PolygonPainter;
 
 PolygonPainter = (function() {
-  PolygonPainter.blendModes = ['multiply', 'screen', 'overlay', 'hue', 'saturation', 'color', 'lighter', 'darker'];
-
-  function PolygonPainter(canvas, colors) {
+  function PolygonPainter(canvas) {
     paper.setup(canvas);
-    this.colors = colors || ['#af93b3', '#e1a7b4', '#ede3e0', '#6b8aca', '#0f1860'];
     this.polygons = [];
+    this.colors = ['#af93b3', '#e1a7b4', '#ede3e0', '#6b8aca', '#0f1860'];
+    this.blendModes = ['multiply', 'screen', 'overlay', 'hue', 'saturation', 'color', 'lighter', 'darker'];
+    this.minimumPoints = 3;
+    this.maximumPoints = 6;
     this.width = view.size.width;
     this.height = view.size.height;
     this.center = new Point(this.width / 2.0, this.height / 2.0);
@@ -29,7 +30,7 @@ PolygonPainter = (function() {
     return view.draw();
   };
 
-  PolygonPainter.prototype.draw = function(n) {
+  PolygonPainter.prototype.draw = function(n, colors, blendModes, minimumPoints, maximumPoints) {
     var polygon, _, _i, _j, _len, _ref;
     _ref = this.polygons;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -37,6 +38,10 @@ PolygonPainter = (function() {
       polygon.remove();
     }
     this.polygons = [];
+    this.colors = colors || ['#af93b3', '#e1a7b4', '#ede3e0', '#6b8aca', '#0f1860'];
+    this.blendModes = blendModes || ['multiply', 'screen', 'overlay', 'hue', 'saturation', 'color', 'lighter', 'darker'];
+    this.minimumPoints = minimumPoints != null ? minimumPoints : this.minimumPoints;
+    this.maximumPoints = maximumPoints != null ? maximumPoints : this.maximumPoints;
     for (_ = _j = 1; 1 <= n ? _j <= n : _j >= n; _ = 1 <= n ? ++_j : --_j) {
       this.randomPolygon(this.points);
     }
@@ -46,7 +51,7 @@ PolygonPainter = (function() {
   PolygonPainter.prototype.randomPolygon = function(points) {
     var index, path, pointsTemp, pointsToRemove, _, _i;
     pointsTemp = this.points.slice(0);
-    pointsToRemove = randomInt(this.points.length - 6, this.points.length - 3);
+    pointsToRemove = randomInt(this.points.length - this.maximumPoints, this.points.length - this.minimumPoints);
     for (_ = _i = 0; 0 <= pointsToRemove ? _i <= pointsToRemove : _i >= pointsToRemove; _ = 0 <= pointsToRemove ? ++_i : --_i) {
       index = pointsTemp.randIndex();
       pointsTemp.splice(index, 1);
@@ -55,8 +60,7 @@ PolygonPainter = (function() {
     path.closed = true;
     path.fillColor = this.colors.randChoose();
     path.fillColor.alpha = .7;
-    console.log(PolygonPainter.blendModes);
-    path.blendMode = PolygonPainter.blendModes.randChoose();
+    path.blendMode = this.blendModes.randChoose();
     this.polygons.push(path);
     return view.draw();
   };

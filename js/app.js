@@ -15,13 +15,38 @@ generateNewSeed = function() {
 };
 
 draw = function() {
+  var color;
   Math.seedrandom(document.getElementById('seed').value);
-  return p.draw(5);
+  return p.draw(Number.parseInt($('#polygons').val()), (function() {
+    var _i, _len, _ref, _results;
+    _ref = $('.color');
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      color = _ref[_i];
+      _results.push(color.value);
+    }
+    return _results;
+  })(), $('#blendModes').val(), Number.parseInt($('#minimumPoints').val()), Number.parseInt($('#maximumPoints').val()));
 };
 
-window.onload = function() {
+$(function() {
   paper.install(window);
   window.p = new PolygonPainter('main');
   generateNewSeed();
-  return draw();
-};
+  draw();
+  $('.color').colorPicker();
+  $('#addcolor').on('click', function(event) {
+    event.preventDefault();
+    $('#colors input').last().clone().appendTo('#colors');
+    $().colorPicker.destroy();
+    return $('.color').colorPicker();
+  });
+  return $('#remcolor').on('click', function(event) {
+    var inputs;
+    event.preventDefault();
+    inputs = $('#colors input');
+    if (inputs.length > 1) {
+      return inputs.last().remove();
+    }
+  });
+});

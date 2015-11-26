@@ -5,10 +5,29 @@ generateNewSeed = ->
 
 draw = ->
   Math.seedrandom(document.getElementById('seed').value);
-  p.draw(5)
+  p.draw(
+    Number.parseInt($('#polygons').val()), 
+    (color.value for color in $ '.color'),
+    $('#blendModes').val(),
+    Number.parseInt($('#minimumPoints').val()),
+    Number.parseInt($('#maximumPoints').val())
+  )
 
-window.onload = ->
+$ ->
   paper.install window
   window.p = new PolygonPainter 'main'
   generateNewSeed()
   draw()
+  $('.color').colorPicker()
+
+  $('#addcolor').on 'click', (event) ->
+    event.preventDefault()
+    $('#colors input').last().clone().appendTo '#colors'
+    $().colorPicker.destroy()
+    $('.color').colorPicker()
+
+  $('#remcolor').on 'click', (event) ->
+    event.preventDefault()
+    inputs = $ '#colors input'
+    if inputs.length > 1
+      inputs.last().remove()
