@@ -1,5 +1,8 @@
+
 body {
   padding: 0 0 10em;
+  position: relative;
+  min-height: 100%;
 }
 
 h1 {
@@ -43,4 +46,10 @@ canvas {
 
 select {
   min-height: 100% ;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
