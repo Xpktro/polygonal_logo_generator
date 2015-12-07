@@ -15,8 +15,8 @@
         <div class="well col-xs-12 col-sm-5 col-sm-offset-1">
           <h4>Main Controls</h4>
           <div class="generator-controls">
-            <button type="button" class="btn btn-success" id="generate" onclick="draw()">Generate from seed</button>
-            <button type="button" class="btn btn-success" id="newseed" onclick="generateNewSeed();draw()">Generate new</button>
+            <button type="button" class="btn btn-success" id="generate" onclick="polygon.website.Application().draw()">Generate from seed</button>
+            <button type="button" class="btn btn-success" id="newseed" onclick="polygon.website.Application().generateNewSeed();polygon.website.Application().draw()">Generate new</button>
           </div>
           <h4>Generation Variables</h4>
           <div class="input-group col-xs-8 col-xs-offset-2">
@@ -25,7 +25,7 @@
           </div>
           <p><small><em>
             Recommended variations (without touching anything else):<br>
-            QaW4OL &mdash; zzPVcR &mdash; xUEfTL &mdash; IVfWD5 &mdash; jmidvE &mdash; iU78y4
+            zzPVcR &mdash; xUEfTL &mdash; IVfWD5 &mdash; jmidvE &mdash; iU78y4
           </em></small></p>
           <div class="input-group col-xs-8 col-xs-offset-2">
             <span class="input-group-addon"><strong>Number of Polygons</strong></span>
@@ -101,13 +101,11 @@
         </p>
       </div>
 
-    <script src="js/vendor/paper.full.min.js"></script>
+    <script src="../target/scala-2.11/scala-js-jsdeps.js"></script>
     <script src="js/vendor/seedrandom.js"></script>
-    <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/vendor/jqColorPicker.min.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/PolygonPainter.js"></script>
-    <script src="js/app.js"></script>
+    <script src="../target/scala-2.11/scala-js-fastopt.js"></script>
+    <script src="../target/scala-2.11/scala-js-launcher.js"></script>
   </body>
 </html>
